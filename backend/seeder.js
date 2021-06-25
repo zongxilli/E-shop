@@ -1,12 +1,12 @@
-import mongoose from 'mongoose'
-import dotenv from 'dotenv'
-import colors from 'colors'
-import users from './data/users.js'
-import products from './data/products.js'
-import User from './models/userModel.js'
-import Product from './models/productModel.js'
-import Order from './models/orderModel.js'
-import connectDB from './config/db.js'
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import colors from 'colors';
+import users from './data/users.js';
+import products from './data/products.js';
+import User from './models/userModel.js';
+import Product from './models/productModel.js';
+import Order from './models/orderModel.js';
+import connectDB from './config/db.js';
 
 dotenv.config();
 
@@ -60,7 +60,7 @@ const destroyData = async () => {
 //                                      process.argv[2]
 if (process.argv[2] === '-d') destroyData();
 else importData();
-// We added 
+// We added
 // "data:import": "node backend/seeder",
 // "data:destroy": "node backend/seeder -d"
 // to scripts in package.json
