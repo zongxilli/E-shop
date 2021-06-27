@@ -18,7 +18,8 @@ connectDB();
 const app = express() ;
 
 
-//`Middleware(Console Log) -> console log out the Address any time we made a request
+//`Middleware(Console Log) -> 
+// console log out the Address any time we made a request
 app.use(requestAddress);
 
 
@@ -30,9 +31,11 @@ app.get('/', (req, res) => {
 app.use('/api/products', productRoutes);
 
 
-//`Middleware(Error) -> throw the error message
+//`Middleware(Error) -> 
+// throw the error message
 app.use(notFound);
-//` Middleware(Error Handler) -> format all of the error message
+//` Middleware(Error Handler) -> 
+// format all of the error message
 app.use(errorHandler);
 
 
