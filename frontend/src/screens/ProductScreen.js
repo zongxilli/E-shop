@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
+import {
+	Row,
+	Col,
+	Image,
+	ListGroup,
+	Card,
+	Button,
+	Form,
+} from 'react-bootstrap';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listProductDetails } from '../actions/productActions';
 
-const ProductScreen = ({ match }) => {
+const ProductScreen = ({ history, match }) => {
+	const [qty, setQty] = useState(1);
+
 	const dispatch = useDispatch();
 
 	// The state.productDetails here is one of the reducers from store.js
@@ -20,38 +30,57 @@ const ProductScreen = ({ match }) => {
 		dispatch(listProductDetails(match.params.id));
 	}, [dispatch, match]);
 
+	const addToCartHandler = () => {
+		history.push(`/cart/${match.params.id}?qty=${qty}`);
+	};
+
 	return (
 		<>
 			<Link className="btn btn-light my-3" to="/">
 				Go Back
 			</Link>
+			{/* if is loading (loading == true) => show {Loader} */}
+			{/* else if there is any error (error != null) => show error {Message} */}
+			{/* else (loading finished & no error) => showing our {main page} */}
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
 				<Row>
+					{/* //=-------------------- Product Image -------------------- */}
 					<Col md={6}>
 						<Image src={product.image} alt={product.name} fluid />
 					</Col>
+					{/* //=-------------------- Product Introduction -------------------- */}
 					<Col md={3}>
 						<ListGroup variant="flush">
+							{/* .......... Name .......... */}
 							<ListGroup.Item>
 								<h3>{product.name}</h3>
 							</ListGroup.Item>
+
+							{/* .......... Rating .......... */}
 							<ListGroup.Item>
 								<Rating value={product.rating} text={`${product.numReviews}`} />
 							</ListGroup.Item>
+
+							{/* .......... Price .......... */}
 							<ListGroup.Item>Price: ${product.price}</ListGroup.Item>
+
+							{/* .......... Description .......... */}
 							<ListGroup.Item>
 								Description: ${product.description}
 							</ListGroup.Item>
 						</ListGroup>
 					</Col>
+					{/* //=-------------------- Product Buy Options -------------------- */}
 					<Col md={3}>
 						<Card>
+							{/* .......... Price .......... */}
 							<ListGroup variant="flush">
 								<ListGroup.Item>
+									0
 									<Row>
 										<Col>Price:</Col>
 										<Col>
@@ -59,6 +88,8 @@ const ProductScreen = ({ match }) => {
 										</Col>
 									</Row>
 								</ListGroup.Item>
+
+								{/* .......... Status .......... */}
 								<ListGroup.Item>
 									<Row>
 										<Col>Status:</Col>
@@ -67,8 +98,36 @@ const ProductScreen = ({ match }) => {
 										</Col>
 									</Row>
 								</ListGroup.Item>
+
+								{/* .......... Quantity .......... */}
+								{/* If the count in stock is <= 0 => we don't have {Select} option */}
+								{product.countInStock > 0 && (
+									<ListGroup.Item>
+										<Row>
+											<Col>Quantity</Col>
+											<Col>
+												<Form.Control
+													as="select"
+													value={qty}
+													onChange={(e) => setQty(e.target.value)}>
+													{[...Array(product.countInStock).keys()].map((x) => (
+														<option
+															key={x + 1}
+															value={x + 1}
+															style={{ color: 'black' }}>
+															{x + 1}
+														</option>
+													))}
+												</Form.Control>
+											</Col>
+										</Row>
+									</ListGroup.Item>
+								)}
+								{/* .......... AddToCart Button .......... */}
+								{/* If the count in stock is <= 0 => this {addToCart} button is disabled */}
 								<ListGroup.Item>
 									<Button
+										onClick={addToCartHandler}
 										className="btn-block"
 										type="button"
 										disabled={product.countInStock === 0}>

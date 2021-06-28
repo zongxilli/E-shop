@@ -23,6 +23,7 @@ const HomeScreen = () => {
 	return (
 		<>
 			<h1>Latest Products</h1>
+			{/* //=-------------------- Products Image -------------------- */}
 			{/* if is loading (loading == true) => show {Loader} */}
 			{/* else if there is any error (error != null) => show error {Message} */}
 			{/* else (loading finished & no error) => showing our {main page} */}
