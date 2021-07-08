@@ -40,7 +40,10 @@ const LoginScreen = ({ location, history }) => {
 
 			{/* If loading => show Loader */}
 			{loading && <Loader />}
+
+			{/* //=-------------------- Sign In Form -------------------- */}
 			<Form onSubmit={submitHandler}>
+				{/* .......... Email Address .......... */}
 				<Form.Group controlId="email">
 					<Form.Label>Email Address</Form.Label>
 					<Form.Control
@@ -50,6 +53,7 @@ const LoginScreen = ({ location, history }) => {
 						onChange={(e) => setEmail(e.target.value)}></Form.Control>
 				</Form.Group>
 
+				{/* .......... Password .......... */}
 				<Form.Group controlId="password">
 					<Form.Label>Password</Form.Label>
 					<Form.Control
@@ -59,10 +63,12 @@ const LoginScreen = ({ location, history }) => {
 						onChange={(e) => setPassword(e.target.value)}></Form.Control>
 				</Form.Group>
 
+				{/* .......... Sign In Button .......... */}
 				<Button type="submit" variant="primary">
 					Sign In
 				</Button>
 			</Form>
+			{/* .......... Register Link  .......... */}
 			<Row className="py-3">
 				<Col>
 					New Customer?{' '}
