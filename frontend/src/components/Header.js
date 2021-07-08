@@ -13,7 +13,7 @@ const Header = ({ location, history }) => {
 	const logoutHandler = () => {
 		dispatch(logout());
 		//todo Me Added redirect to the signIn page after people signing out using withRouter
-		history.push("/login");
+		history.push('/login');
 	};
 
 	return (
@@ -32,7 +32,7 @@ const Header = ({ location, history }) => {
 									<i className="fas fa-shopping-cart"></i> Cart
 								</Nav.Link>
 							</LinkContainer>
-							{/* -------------------- Profile Dropdown & login -------------------- */}
+							{/* -------------------- Profile Dropdown(profile || logout) & login -------------------- */}
 							{userInfo ? (
 								<NavDropdown title={userInfo.name} id="username">
 									<LinkContainer to="/profile">
