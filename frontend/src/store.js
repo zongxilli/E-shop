@@ -7,14 +7,15 @@ import {
 } from './reducers/productReducers';
 
 import { cartReducer } from './reducers/cartReducers';
-import { userLoginReducer } from './reducers/userReducers';
+import { userLoginReducer, userRegisterReducer } from './reducers/userReducers';
 
-//` Reducers
+
 const reducer = combineReducers({
 	productList: productListReducer,
 	productDetails: productDetailsReducer,
 	cart: cartReducer,
 	userLogin: userLoginReducer,
+	userRegister: userRegisterReducer
 });
 
 // get the cartItems from localStorage
@@ -41,4 +42,4 @@ const store = createStore(
 	composeWithDevTools(applyMiddleware(...middleware))
 );
 
-export default store;
+export default store; 
