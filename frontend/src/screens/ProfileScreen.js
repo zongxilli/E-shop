@@ -3,7 +3,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { getUserDetails } from '../actions/userActions';
+import { getUserDetails, updateUserProfile } from '../actions/userActions';
 
 const ProfileScreen = ({ location, history }) => {
 	const [name, setName] = useState('');
@@ -18,9 +18,13 @@ const ProfileScreen = ({ location, history }) => {
 	const userDetails = useSelector((state) => state.userDetails);
 	const { loading, error, user } = userDetails;
 
-	// REDUCER: userLogin <- store,js <- userLogin Reducer
+	// REDUCER: userLogin <- store.js <- userLogin Reducer
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
+
+	// REDUCER: userUpdateProfile <- store.js <- userUpdateProfile Reducer
+	const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+	const { success } = userUpdateProfile;
 
 	useEffect(() => {
 		if (!userInfo) {
@@ -43,8 +47,8 @@ const ProfileScreen = ({ location, history }) => {
 		if (password !== confirmPassword) {
 			setMessage('Passwords do not match');
 		} else {
-			// ACTION: Register <- Register Action
-			// DISPATCH UPDATE PROFILE
+			// ACTION: userUpdateProfile <- userUpdateProfile Action
+			dispatch(updateUserProfile({ id: user._id, name, email, password }));
 		}
 	};
 
@@ -58,6 +62,9 @@ const ProfileScreen = ({ location, history }) => {
 
 				{/* If error exists => show error message */}
 				{error && <Message variant="danger">{error}</Message>}
+
+				{/* If success exists => show success message */}
+				{success && <Message variant="success">Profile Updated</Message>}
 
 				{/* If loading => show Loader */}
 				{loading && <Loader />}
