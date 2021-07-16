@@ -147,6 +147,14 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
 			type: USER_UPDATE_PROFILE_SUCCESS,
 			payload: data,
 		});
+
+		// Next 2 funcs
+		// is For updating the name at the top right after updating of user profile
+		dispatch({
+			type: USER_LOGIN_SUCCESS,
+			payload: data,
+		});
+		localStorage.setItem('userInfo', JSON.stringify(data));
 	} catch (error) {
 		dispatch({
 			type: USER_UPDATE_PROFILE_FAIL,
