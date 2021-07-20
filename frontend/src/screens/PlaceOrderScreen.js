@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
+import { createOrder } from '../actions/orderActions';
 
-const PlaceOrderScreen = () => {
+const PlaceOrderScreen = ({ history }) => {
+	const dispatch = useDispatch();
 	const cart = useSelector((state) => state.cart);
-
-	const toTwoDecimals = (num) => {
-		return (Math.round(num * 100) / 100).toFixed(2);
-	};
 
 	const formatter = new Intl.NumberFormat('en-US', {
 		style: 'currency',
@@ -18,21 +16,42 @@ const PlaceOrderScreen = () => {
 		minimumFractionDigits: 2,
 	});
 
-	const itemsPrice = cart.cartItems.reduce(
-		(acc, item) => acc + item.price * item.qty,
-		0
+	const addDecimals = (num) => {
+		return (Math.round(num * 100) / 100).toFixed(2);
+	};
+	cart.itemsPrice = addDecimals(
+		cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
 	);
-	const shippingPrice = itemsPrice > 100 ? 0 : 20;
-	const taxPrice = 0.13 * itemsPrice;
-	const totalPrice = itemsPrice + shippingPrice + taxPrice;
+	cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 20);
+	cart.taxPrice = addDecimals(Number((0.13 * cart.itemsPrice).toFixed(2)));
+	cart.totalPrice = (
+		Number(cart.itemsPrice) +
+		Number(cart.shippingPrice) +
+		Number(cart.taxPrice)
+	).toFixed(2);
 
-	cart.itemsPrice = formatter.format(itemsPrice);
-	cart.shippingPrice = formatter.format(shippingPrice);
-	cart.taxPrice = formatter.format(taxPrice);
-	cart.totalPrice = formatter.format(totalPrice);
+	const orderCreate = useSelector((state) => state.orderCreate);
+	const { order, success, error } = orderCreate;
+
+	useEffect(() => {
+		if (success) {
+			history.push(`/order/${order._id}`);
+		}
+		// eslint-disable-next-line
+	}, [history, success]);
 
 	const placeOrderHandler = () => {
-		console.log(Order);
+		dispatch(
+			createOrder({
+				orderItems: cart.cartItems,
+				shippingAddress: cart.shippingAddress,
+				paymentMethod: cart.paymentMethod,
+				itemsPrice: cart.itemsPrice,
+				shippingPrice: cart.shippingPrice,
+				taxPrice: cart.taxPrice,
+				totalPrice: cart.totalPrice,
+			})
+		);
 	};
 
 	return (
@@ -107,30 +126,36 @@ const PlaceOrderScreen = () => {
 							<ListGroup.Item>
 								<Row>
 									<Col>Items</Col>
-									<Col>{cart.itemsPrice}</Col>
-								</Row>
-							</ListGroup.Item>
-							{/* .......... Shipping .......... */}
-							<ListGroup.Item>
-								<Row>
-									<Col>Shipping</Col>
-									<Col>{cart.shippingPrice}</Col>
+									<Col>CA$ {cart.itemsPrice}</Col>
 								</Row>
 							</ListGroup.Item>
 							{/* .......... Tax .......... */}
 							<ListGroup.Item>
 								<Row>
 									<Col>Tax (13%)</Col>
-									<Col>{cart.taxPrice}</Col>
+									<Col>CA$ {cart.taxPrice}</Col>
+								</Row>
+							</ListGroup.Item>
+							{/* .......... Shipping .......... */}
+							<ListGroup.Item>
+								<Row>
+									<Col>Shipping (free over 100)</Col>
+									<Col>CA$ {cart.shippingPrice}</Col>
 								</Row>
 							</ListGroup.Item>
 							{/* .......... Total .......... */}
 							<ListGroup.Item>
 								<Row>
 									<Col>Total</Col>
-									<Col>{cart.totalPrice}</Col>
+									<Col>CA$ {cart.totalPrice}</Col>
 								</Row>
 							</ListGroup.Item>
+
+							{/* .......... Check if has error .......... */}
+							<ListGroup.Item>
+								{error && <Message variant="danger">{error}</Message>}
+							</ListGroup.Item>
+
 							{/* .......... Place Order Button .......... */}
 							<ListGroup.Item>
 								<Button
