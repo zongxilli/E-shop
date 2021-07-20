@@ -11,6 +11,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import { requestAddress } from './middleware/consoleLogMiddleware.js';
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 
 //`Middleware(Error) ->
 // throw the error message
@@ -39,7 +41,7 @@ app.use(notFound);
 // format all of the error message
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 
 app.listen(
 	PORT,
