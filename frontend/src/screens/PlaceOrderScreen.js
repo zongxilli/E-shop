@@ -8,6 +8,35 @@ import CheckoutSteps from '../components/CheckoutSteps';
 const PlaceOrderScreen = () => {
 	const cart = useSelector((state) => state.cart);
 
+	const toTwoDecimals = (num) => {
+		return (Math.round(num * 100) / 100).toFixed(2);
+	};
+
+	// Calculate Price
+	cart.itemsPrice = cart.cartItems.reduce(
+		(acc, item) => acc + item.price * item.qty,
+		0
+	);
+
+	// Shipping Price  free for order more than $100
+	cart.shippingPrice = cart.itemsPrice > 100 ? 0 : 20;
+
+	// Tax Price
+	cart.taxPrice = (0.13 * cart.itemsPrice).toFixed(2);
+
+	// Total Price
+	cart.totalPrice = toTwoDecimals(
+		(
+			Number(cart.itemsPrice) +
+			Number(cart.shippingPrice) +
+			Number(cart.taxPrice)
+		).toFixed(2)
+	);
+
+	const placeOrderHandler = () => {
+		console.log(Order);
+	};
+
 	return (
 		<>
 			{/* //=-------------------- Details -------------------- */}
@@ -68,6 +97,54 @@ const PlaceOrderScreen = () => {
 							)}
 						</ListGroup.Item>
 					</ListGroup>
+				</Col>
+				{/* //=-------------------- Summary -------------------- */}
+				<Col md={4}>
+					<Card>
+						<ListGroup variant="flush">
+							<ListGroup.Item>
+								<h2>Order Summary</h2>
+							</ListGroup.Item>
+							{/* .......... Items .......... */}
+							<ListGroup.Item>
+								<Row>
+									<Col>Items</Col>
+									<Col>${cart.itemsPrice}</Col>
+								</Row>
+							</ListGroup.Item>
+							{/* .......... Shipping .......... */}
+							<ListGroup.Item>
+								<Row>
+									<Col>Shipping</Col>
+									<Col>${cart.shippingPrice}</Col>
+								</Row>
+							</ListGroup.Item>
+							{/* .......... Tax .......... */}
+							<ListGroup.Item>
+								<Row>
+									<Col>Tax (13%)</Col>
+									<Col>${cart.taxPrice}</Col>
+								</Row>
+							</ListGroup.Item>
+							{/* .......... Total .......... */}
+							<ListGroup.Item>
+								<Row>
+									<Col>Total</Col>
+									<Col>${cart.totalPrice}</Col>
+								</Row>
+							</ListGroup.Item>
+							{/* .......... Place Order Button .......... */}
+							<ListGroup.Item>
+								<Button
+									type="button"
+									className="btn-block"
+									disabled={cart.cartItems === 0}
+									onClick={placeOrderHandler}>
+									Place Order
+								</Button>
+							</ListGroup.Item>
+						</ListGroup>
+					</Card>
 				</Col>
 			</Row>
 		</>
