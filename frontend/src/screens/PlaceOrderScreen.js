@@ -10,11 +10,11 @@ const PlaceOrderScreen = ({ history }) => {
 	const dispatch = useDispatch();
 	const cart = useSelector((state) => state.cart);
 
-	const formatter = new Intl.NumberFormat('en-US', {
-		style: 'currency',
-		currency: 'CAD',
-		minimumFractionDigits: 2,
-	});
+	// const formatter = new Intl.NumberFormat('en-US', {
+	// 	style: 'currency',
+	// 	currency: 'CAD',
+	// 	minimumFractionDigits: 2,
+	// });
 
 	const addDecimals = (num) => {
 		return (Math.round(num * 100) / 100).toFixed(2);
