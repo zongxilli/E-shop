@@ -9,10 +9,10 @@ const connectDB = async () => {
 		});
 
 		// .cyan.underline -> give color in terminal
-		console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline);
+		console.log(`MongoDB Connected to: ${conn.connection.host}`.magenta);
 	} catch (error) {
 		// .red.underline -> give color in terminal
-		console.error(`出Error了: ${error.message}`.red.underline.bold);
+		console.error(`Failed to Connect to MongoDB: ${error.message}`.red);
 		// Error -> we exit     1 means we gonna exit with failure
 		process.exit(1);
 	}
