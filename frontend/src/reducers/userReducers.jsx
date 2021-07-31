@@ -85,7 +85,7 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
 		// which will show the state of previous user, not the current one
 		// because the past state isn't cleaned yet
 		case USER_DETAILS_RESET:
-			return {};
+			return { user: {} };
 
 		default:
 			return state;
