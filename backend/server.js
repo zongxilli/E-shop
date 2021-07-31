@@ -34,6 +34,10 @@ app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
 
+app.get('/api/config/paypal', (req, res) =>
+	res.send(process.env.PAYPAL_CLIENT_ID)
+);
+
 //`Middleware(Error) ->
 // throw the error message
 app.use(notFound);
@@ -47,7 +51,6 @@ app.listen(
 	PORT,
 	console.log(
 		`Server Running In ${process.env.NODE_ENV} mode On Port: ${PORT}`.magenta
-			
 	)
 );
 
