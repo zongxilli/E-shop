@@ -21,9 +21,7 @@ const authUser = expressAsyncHandler(async (req, res) => {
 			isAdmin: user.isAdmin,
 			token: generateToken(user._id),
 		});
-	}
-	// User does not exist => set status to 401 error & throw a error message
-	else {
+	} else {
 		res.status(401);
 		throw new Error('Invalid email or password');
 	}
@@ -80,9 +78,7 @@ const getUserProfile = expressAsyncHandler(async (req, res) => {
 			email: user.email,
 			isAdmin: user.isAdmin,
 		});
-	}
-	// User does not exist => set status to 401 error & throw a error message
-	else {
+	} else {
 		res.status(404);
 		throw new Error('User not found');
 	}
@@ -112,12 +108,19 @@ const updateUserProfile = expressAsyncHandler(async (req, res) => {
 			isAdmin: updatedUser.isAdmin,
 			token: generateToken(updatedUser._id),
 		});
-	}
-	// User does not exist => set status to 401 error & throw a error message
-	else {
+	} else {
 		res.status(404);
 		throw new Error('User not found');
 	}
 });
 
-export { authUser, registerUser, getUserProfile, updateUserProfile };
+// @desc    Get all users
+// @route   GET /api/users/
+// @access  Private/Admin
+const getUsers = expressAsyncHandler(async (req, res) => {
+	// The reason we pass {} is because we want to get all users
+	const users = await User.find({});
+	res.json(users);
+});
+
+export { authUser, registerUser, getUserProfile, updateUserProfile, getUsers };
