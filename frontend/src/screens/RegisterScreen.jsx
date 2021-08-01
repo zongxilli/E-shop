@@ -44,7 +44,7 @@ const RegisterScreen = ({ location, history }) => {
 		<FormContainer>
 			<h1>Sign Up</h1>
 
-			{/* If message exists => show error message */}
+			{/* If message exists => show message */}
 			{message && <Message variant="danger">{message}</Message>}
 
 			{/* If error exists => show error message */}
