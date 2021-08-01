@@ -49,6 +49,7 @@ const Header = ({ location, history }) => {
 									</Nav.Link>
 								</LinkContainer>
 							)}
+							{/* -------------------- Admin Dropdown(Users || Products || Orders) & login -------------------- */}
 							{userInfo && userInfo.isAdmin && (
 								<NavDropdown title="Admin" id="adminmenu">
 									<LinkContainer to="/admin/userlist">

@@ -15,26 +15,34 @@ const UserListScreen = ({ history }) => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
-	const userDelete = useSelector((state) => state.userDelete);
-	const { success: successDelete } = userDelete;
+	// const userDelete = useSelector((state) => state.userDelete);
+	// const { success: successDelete } = userDelete;
 
 	useEffect(() => {
+		// If is an admin user => show the list of users
 		if (userInfo && userInfo.isAdmin) {
 			dispatch(listUsers());
-		} else {
+		}
+		// If it is not an admin user => redirect back to /login
+		else {
 			history.push('/login');
 		}
-	}, [dispatch, history, successDelete, userInfo]);
+
+		dispatch(listUsers());
+
+		//successDelete
+	}, [dispatch, history, userInfo]);
 
 	const deleteHandler = (id) => {
 		// if (window.confirm('Are you sure')) {
 		// 	dispatch(deleteUser(id));
 		// }
-    console.log('delete user')
+		console.log('delete user');
 	};
 
 	return (
 		<>
+			{/* //=-------------------- Users -------------------- */}
 			<h1>Users</h1>
 			{loading ? (
 				<Loader />
@@ -42,6 +50,7 @@ const UserListScreen = ({ history }) => {
 				<Message variant="danger">{error}</Message>
 			) : (
 				<Table striped bordered hover responsive className="table-sm">
+					{/* .......... First Row .......... */}
 					<thead>
 						<tr>
 							<th>ID</th>
@@ -51,16 +60,21 @@ const UserListScreen = ({ history }) => {
 							<th></th>
 						</tr>
 					</thead>
+					{/* .......... Body Rows .......... */}
 					<tbody>
 						{users.map((forEachUser) => (
 							<tr key={forEachUser.id}>
+								{/* .......... ID .......... */}
 								<td>{forEachUser._id}</td>
+								{/* .......... NAME .......... */}
 								<td>{forEachUser.name}</td>
+								{/* .......... EMAIL .......... */}
 								<td>
 									<a href={`mailto:${forEachUser.email}`}>
 										{forEachUser.email}
 									</a>
 								</td>
+								{/* .......... ADMIN .......... */}
 								<td>
 									{forEachUser.isAdmin ? (
 										<i className="fas fa-check" style={{ color: 'green' }}></i>
@@ -68,6 +82,7 @@ const UserListScreen = ({ history }) => {
 										<i className="fas fa-times" style={{ color: 'red' }}></i>
 									)}
 								</td>
+								{/* .......... EDIT & DELETE .......... */}
 								<td>
 									<LinkContainer to={`/user/${forEachUser._id}/edit`}>
 										<Button variant="light" className="btn-sm">

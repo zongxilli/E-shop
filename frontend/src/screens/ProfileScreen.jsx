@@ -148,7 +148,7 @@ const ProfileScreen = ({ location, history }) => {
 								<th></th>
 							</tr>
 						</thead>
-						{/* .......... Each Order Row .......... */}
+						{/* .......... Body Rows .......... */}
 						<tbody>
 							{orders.map((forEachOrder) => (
 								<tr key={forEachOrder._id}>
