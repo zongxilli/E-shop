@@ -15,8 +15,8 @@ const UserListScreen = ({ history }) => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
-	// const userDelete = useSelector((state) => state.userDelete);
-	// const { success: successDelete } = userDelete;
+	const userDelete = useSelector((state) => state.userDelete);
+	const { success: successDelete } = userDelete;
 
 	useEffect(() => {
 		// If is an admin user => show the list of users
@@ -29,15 +29,12 @@ const UserListScreen = ({ history }) => {
 		}
 
 		dispatch(listUsers());
-
-		//successDelete
-	}, [dispatch, history, userInfo]);
+	}, [dispatch, history, userInfo, successDelete]);
 
 	const deleteHandler = (id) => {
-		// if (window.confirm('Are you sure')) {
-		// 	dispatch(deleteUser(id));
-		// }
-		console.log('delete user');
+		if (window.confirm('Are you sure')) {
+			dispatch(deleteUser(id));
+		}
 	};
 
 	return (
