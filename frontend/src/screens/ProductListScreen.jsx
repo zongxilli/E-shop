@@ -94,8 +94,8 @@ const ProductListScreen = ({ history, match }) => {
 				<>
 					{/* //=-------------------- Products -------------------- */}
 					<Table striped bordered hover responsive className="table-sm">
+						{/* .......... First Row .......... */}
 						<thead>
-							{/* .......... First Row .......... */}
 							<tr>
 								<th>ID</th>
 								<th>NAME</th>
