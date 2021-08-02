@@ -4,7 +4,7 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import Paginate from '../components/Paginate';
+//import Paginate from '../components/Paginate';
 import {
 	listProducts,
 	deleteProduct,
@@ -119,6 +119,7 @@ const ProductListScreen = ({ history, match }) => {
 									<td>{forEachProduct.category}</td>
 									{/* .......... BRAND .......... */}
 									<td>{forEachProduct.brand}</td>
+									{/* .......... EDIT & DELETE .......... */}
 									<td>
 										<LinkContainer
 											to={`/admin/product/${forEachProduct._id}/edit`}>
@@ -137,7 +138,7 @@ const ProductListScreen = ({ history, match }) => {
 							))}
 						</tbody>
 					</Table>
-					<Paginate pages={pages} page={page} isAdmin={true} />
+					{/* <Paginate pages={pages} page={page} isAdmin={true} /> */}
 				</>
 			)}
 		</>
