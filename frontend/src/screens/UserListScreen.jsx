@@ -39,64 +39,68 @@ const UserListScreen = ({ history }) => {
 
 	return (
 		<>
-			{/* //=-------------------- Users -------------------- */}
 			<h1>Users</h1>
 			{loading ? (
 				<Loader />
 			) : error ? (
 				<Message variant="danger">{error}</Message>
 			) : (
-				<Table striped bordered hover responsive className="table-sm">
-					{/* .......... First Row .......... */}
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>NAME</th>
-							<th>EMAIL</th>
-							<th>ADMIN</th>
-							<th></th>
-						</tr>
-					</thead>
-					{/* .......... Body Rows .......... */}
-					<tbody>
-						{users.map((forEachUser) => (
-							<tr key={forEachUser.id}>
-								{/* .......... ID .......... */}
-								<td>{forEachUser._id}</td>
-								{/* .......... NAME .......... */}
-								<td>{forEachUser.name}</td>
-								{/* .......... EMAIL .......... */}
-								<td>
-									<a href={`mailto:${forEachUser.email}`}>
-										{forEachUser.email}
-									</a>
-								</td>
-								{/* .......... ADMIN .......... */}
-								<td>
-									{forEachUser.isAdmin ? (
-										<i className="fas fa-check" style={{ color: 'green' }}></i>
-									) : (
-										<i className="fas fa-times" style={{ color: 'red' }}></i>
-									)}
-								</td>
-								{/* .......... EDIT & DELETE .......... */}
-								<td>
-									<LinkContainer to={`/admin/user/${forEachUser._id}/edit`}>
-										<Button variant="light" className="btn-sm">
-											<i className="fas fa-edit"></i>
-										</Button>
-									</LinkContainer>
-									<Button
-										variant="danger"
-										className="btn-sm"
-										onClick={() => deleteHandler(forEachUser._id)}>
-										<i className="fas fa-trash"></i>
-									</Button>
-								</td>
+				<>
+					{/* //=-------------------- Users -------------------- */}
+					<Table striped bordered hover responsive className="table-sm">
+						{/* .......... First Row .......... */}
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>NAME</th>
+								<th>EMAIL</th>
+								<th>ADMIN</th>
+								<th></th>
 							</tr>
-						))}
-					</tbody>
-				</Table>
+						</thead>
+						{/* .......... Body Rows .......... */}
+						<tbody>
+							{users.map((forEachUser) => (
+								<tr key={forEachUser.id}>
+									{/* .......... ID .......... */}
+									<td>{forEachUser._id}</td>
+									{/* .......... NAME .......... */}
+									<td>{forEachUser.name}</td>
+									{/* .......... EMAIL .......... */}
+									<td>
+										<a href={`mailto:${forEachUser.email}`}>
+											{forEachUser.email}
+										</a>
+									</td>
+									{/* .......... ADMIN .......... */}
+									<td>
+										{forEachUser.isAdmin ? (
+											<i
+												className="fas fa-check"
+												style={{ color: 'green' }}></i>
+										) : (
+											<i className="fas fa-times" style={{ color: 'red' }}></i>
+										)}
+									</td>
+									{/* .......... EDIT & DELETE .......... */}
+									<td>
+										<LinkContainer to={`/admin/user/${forEachUser._id}/edit`}>
+											<Button variant="light" className="btn-sm">
+												<i className="fas fa-edit"></i>
+											</Button>
+										</LinkContainer>
+										<Button
+											variant="danger"
+											className="btn-sm"
+											onClick={() => deleteHandler(forEachUser._id)}>
+											<i className="fas fa-trash"></i>
+										</Button>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</Table>
+				</>
 			)}
 		</>
 	);
