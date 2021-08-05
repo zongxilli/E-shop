@@ -4,6 +4,7 @@ import path from 'path';
 import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
+import morgan from 'morgan';
 
 //! Remember to keep .js at the end
 
@@ -22,9 +23,10 @@ connectDB();
 
 const app = express();
 
-//`Middleware(Console Log) ->
-// Console log out the Address any time we made a request
-app.use(requestAddress);
+// This will console log the request that we have made
+if (process.env.NODE_ENV === 'development') {
+	app.use(morgan('dev'));
+}
 
 // This allow us to accept JSON data in the body
 app.use(express.json());
