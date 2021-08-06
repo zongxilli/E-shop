@@ -12,6 +12,7 @@ import {
 } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import Loader from '../components/Loader';
+import Meta from '../components/Meta';
 import Message from '../components/Message';
 import {
 	listProductDetails,
@@ -66,6 +67,7 @@ const ProductScreen = ({ history, match }) => {
 
 	return (
 		<>
+		
 			<Link className="btn btn-light my-3" to="/">
 				Go Back
 			</Link>
@@ -78,6 +80,7 @@ const ProductScreen = ({ history, match }) => {
 				<Message variant="danger">{error}</Message>
 			) : (
 				<>
+				<Meta title={product.name} />
 					<Row>
 						{/* //=-------------------- Product Image -------------------- */}
 						<Col md={6}>
