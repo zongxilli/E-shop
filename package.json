@@ -4,6 +4,9 @@
 	"description": "E-shop ",
 	"main": "server.js",
 	"type": "module",
+	"engines": {
+    "node": "14.17.0"
+  },
 	"scripts": {
 		"start": "node backend/server",
 		"server": "nodemon backend/server",
@@ -17,7 +20,7 @@
 		"type": "git",
 		"url": "git+https://github.com/zongxilli/E-shop.git"
 	},
-	"author": "Zongxi(Kenny) Li",
+	"author": "",
 	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/zongxilli/E-shop/issues"
