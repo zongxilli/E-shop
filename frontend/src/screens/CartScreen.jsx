@@ -12,6 +12,7 @@ import {
 } from 'react-bootstrap';
 import Message from '../components/Message';
 import { addToCart, removeFromCart } from '../actions/cartActions';
+import Meta from '../components/Meta';
 
 const CartScreen = ({ match, location, history }) => {
 	const productId = match.params.id;
@@ -43,6 +44,7 @@ const CartScreen = ({ match, location, history }) => {
 
 	return (
 		<Row>
+			<Meta title={'Shopping Cart'} />
 			<Col md={8}>
 				<h1>Shopping Cart</h1>
 				{/* //=-------------------- Cart List -------------------- */}

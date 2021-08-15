@@ -6,6 +6,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { register } from '../actions/userActions';
+import Meta from '../components/Meta';
 
 const RegisterScreen = ({ location, history }) => {
 	const [name, setName] = useState('');
@@ -42,6 +43,7 @@ const RegisterScreen = ({ location, history }) => {
 
 	return (
 		<FormContainer>
+			<Meta title={'Sign Up'} />
 			<h1>Sign Up</h1>
 
 			{/* If message exists => show message */}
