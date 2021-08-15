@@ -107,7 +107,7 @@ const ProductScreen = ({ history, match }) => {
 
 								{/* .......... Description .......... */}
 								<ListGroup.Item>
-									Description: ${product.description}
+									Description: {product.description}
 								</ListGroup.Item>
 							</ListGroup>
 						</Col>
