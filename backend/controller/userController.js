@@ -8,12 +8,9 @@ import User from '../models/userModel.js';
 const authUser = expressAsyncHandler(async (req, res) => {
 	const { email, password } = req.body;
 
-	// Find email of this user
-	const user = await User.findOne({ email: email });
+	const user = await User.findOne({ email });
 
-	// If user exist => check if the password is correct
 	if (user && (await user.matchPassword(password))) {
-		// Return this json
 		res.json({
 			_id: user._id,
 			name: user.name,
@@ -33,10 +30,8 @@ const authUser = expressAsyncHandler(async (req, res) => {
 const registerUser = expressAsyncHandler(async (req, res) => {
 	const { name, email, password } = req.body;
 
-	// To see if this user is already registered
-	const userExists = await User.findOne({ email: email });
+	const userExists = await User.findOne({ email });
 
-	// If this user is already registered
 	if (userExists) {
 		res.status(400);
 		throw new Error('User already exists');
@@ -48,7 +43,6 @@ const registerUser = expressAsyncHandler(async (req, res) => {
 		password,
 	});
 
-	// This is a new user
 	if (user) {
 		res.status(201).json({
 			_id: user._id,
@@ -58,8 +52,8 @@ const registerUser = expressAsyncHandler(async (req, res) => {
 			token: generateToken(user._id),
 		});
 	} else {
-		res.status(404);
-		throw new Error('User not found');
+		res.status(400);
+		throw new Error('Invalid user data');
 	}
 });
 
@@ -155,26 +149,27 @@ const getUserById = expressAsyncHandler(async (req, res) => {
 // @route   PUT /api/users/:id
 // @access  Private/Admin
 const updateUser = expressAsyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id)
+	const user = await User.findById(req.params.id);
 
-  if (user) {
-    user.name = req.body.name || user.name
-    user.email = req.body.email || user.email
-    user.isAdmin = req.body.isAdmin === undefined ? user.isAdmin : req.body.isAdmin
+	if (user) {
+		user.name = req.body.name || user.name;
+		user.email = req.body.email || user.email;
+		user.isAdmin =
+			req.body.isAdmin === undefined ? user.isAdmin : req.body.isAdmin;
 
-    const updatedUser = await user.save()
+		const updatedUser = await user.save();
 
-    res.json({
-      _id: updatedUser._id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      isAdmin: updatedUser.isAdmin,
-    })
-  } else {
-    res.status(404)
-    throw new Error('User not found')
-  }
-})
+		res.json({
+			_id: updatedUser._id,
+			name: updatedUser.name,
+			email: updatedUser.email,
+			isAdmin: updatedUser.isAdmin,
+		});
+	} else {
+		res.status(404);
+		throw new Error('User not found');
+	}
+});
 
 export {
 	authUser,
