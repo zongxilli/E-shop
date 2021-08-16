@@ -42,13 +42,13 @@ const ProductScreen = ({ history, match }) => {
 
 	useEffect(() => {
 		if (successProductReview) {
-      setRating(0)
-      setComment('')
-    }
-    if (!product._id || product._id !== match.params.id) {
-      dispatch(listProductDetails(match.params.id))
-      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
-    }
+			setRating(0);
+			setComment('');
+		}
+		if (!product._id || product._id !== match.params.id) {
+			dispatch(listProductDetails(match.params.id));
+			dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
+		}
 	}, [dispatch, match, successProductReview]);
 
 	const addToCartHandler = () => {
@@ -67,7 +67,6 @@ const ProductScreen = ({ history, match }) => {
 
 	return (
 		<>
-		
 			<Link className="btn btn-light my-3" to="/">
 				Go Back
 			</Link>
@@ -80,7 +79,7 @@ const ProductScreen = ({ history, match }) => {
 				<Message variant="danger">{error}</Message>
 			) : (
 				<>
-				<Meta title={product.name} />
+					<Meta title={product.name} />
 					<Row>
 						{/* //=-------------------- Product Image -------------------- */}
 						<Col md={6}>
@@ -177,11 +176,13 @@ const ProductScreen = ({ history, match }) => {
 							</Card>
 						</Col>
 					</Row>
+					{/* //=-------------------- Product Review -------------------- */}
 					<Row>
 						<Col md={6}>
 							<h2>Reviews</h2>
 							{product.reviews.length === 0 && <Message>No Reviews</Message>}
 							<ListGroup variant="flush">
+								{/* .......... Reviews .......... */}
 								{product.reviews.map((review) => (
 									<ListGroup.Item key={review._id}>
 										<strong>{review.name}</strong>
@@ -204,20 +205,46 @@ const ProductScreen = ({ history, match }) => {
 									{userInfo ? (
 										<Form onSubmit={submitHandler}>
 											<Form.Group controlId="rating">
+												{/* .......... Rating .......... */}
 												<Form.Label>Rating</Form.Label>
 												<Form.Control
 													as="select"
 													value={rating}
 													onChange={(e) => setRating(e.target.value)}>
-													<option value="">Select...</option>
-													<option value="1">1 - Poor</option>
-													<option value="2">2 - Fair</option>
-													<option value="3">3 - Good</option>
-													<option value="4">4 - Very Good</option>
-													<option value="5">5 - Excellent</option>
+													<option
+														value=""
+														style={{ backgroundColor: 'rgba(232,50,131,255)' }}>
+														Select...
+													</option>
+													<option
+														value="1"
+														style={{ backgroundColor: 'rgba(232,50,131,255)' }}>
+														1 - Poor
+													</option>
+													<option
+														value="2"
+														style={{ backgroundColor: 'rgba(232,50,131,255)' }}>
+														2 - Fair
+													</option>
+													<option
+														value="3"
+														style={{ backgroundColor: 'rgba(232,50,131,255)' }}>
+														3 - Good
+													</option>
+													<option
+														value="4"
+														style={{ backgroundColor: 'rgba(232,50,131,255)' }}>
+														4 - Very Good
+													</option>
+													<option
+														value="5"
+														style={{ backgroundColor: 'rgba(232,50,131,255)' }}>
+														5 - Excellent
+													</option>
 												</Form.Control>
 											</Form.Group>
 											<Form.Group controlId="comment">
+												{/* .......... Comment .......... */}
 												<Form.Label>Comment</Form.Label>
 												<Form.Control
 													as="textarea"
@@ -227,6 +254,7 @@ const ProductScreen = ({ history, match }) => {
 														setComment(e.target.value)
 													}></Form.Control>
 											</Form.Group>
+											{/* .......... Submit Button .......... */}
 											<Button
 												disabled={loadingProductReview}
 												type="submit"
