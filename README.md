@@ -26,4 +26,9 @@ Start both frontend & backend
 > PayPal
 
 ![alt text](https://github.com/zongxilli/E-shop/blob/main/images/Demo%20(6).png)
+> Admin Area
+![alt text](https://github.com/zongxilli/E-shop/blob/main/images/Demo%20(7).png)
+![alt text](https://github.com/zongxilli/E-shop/blob/main/images/Demo%20(8).png)
+![alt text](https://github.com/zongxilli/E-shop/blob/main/images/Demo%20(9).png)
+![alt text](https://github.com/zongxilli/E-shop/blob/main/images/Demo%20(10).png)
 ### And More...
