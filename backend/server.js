@@ -28,7 +28,6 @@ if (process.env.NODE_ENV === 'development') {
 	app.use(morgan('dev'));
 }
 
-// This allow us to accept JSON data in the body
 app.use(express.json());
 
 app.use('/api/products', productRoutes);

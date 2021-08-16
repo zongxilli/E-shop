@@ -31,15 +31,9 @@ const getProducts = expressAsyncHandler(async (req, res) => {
 const getProductById = expressAsyncHandler(async (req, res) => {
 	const product = await Product.findById(req.params.id);
 
-	// If we found product <=> product !== null
 	if (product) {
-		// give back a json format response
 		res.json(product);
-
-		// product is null <=> failed to get response
 	} else {
-		// 500 error by default
-		// We set it to 404
 		res.status(404);
 		throw new Error('Product not found');
 	}
