@@ -104,6 +104,9 @@ const ProductScreen = ({ history, match }) => {
 								{/* .......... Price .......... */}
 								<ListGroup.Item>Price: ${product.price}</ListGroup.Item>
 
+								{/* .......... Category .......... */}
+								{/* <ListGroup.Item>Category: {product.category}</ListGroup.Item> */}
+
 								{/* .......... Description .......... */}
 								<ListGroup.Item>
 									Description: {product.description}
@@ -116,7 +119,6 @@ const ProductScreen = ({ history, match }) => {
 								{/* .......... Price .......... */}
 								<ListGroup variant="flush">
 									<ListGroup.Item>
-										0
 										<Row>
 											<Col>Price:</Col>
 											<Col>
