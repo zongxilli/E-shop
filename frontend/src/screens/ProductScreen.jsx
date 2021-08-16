@@ -211,34 +211,22 @@ const ProductScreen = ({ history, match }) => {
 													as="select"
 													value={rating}
 													onChange={(e) => setRating(e.target.value)}>
-													<option
-														value=""
-														style={{ backgroundColor: 'rgba(232,50,131,255)' }}>
+													<option value="" style={{ color: 'black' }}>
 														Select...
 													</option>
-													<option
-														value="1"
-														style={{ backgroundColor: 'rgba(232,50,131,255)' }}>
+													<option value="1" style={{ color: 'black' }}>
 														1 - Poor
 													</option>
-													<option
-														value="2"
-														style={{ backgroundColor: 'rgba(232,50,131,255)' }}>
+													<option value="2" style={{ color: 'black' }}>
 														2 - Fair
 													</option>
-													<option
-														value="3"
-														style={{ backgroundColor: 'rgba(232,50,131,255)' }}>
+													<option value="3" style={{ color: 'black' }}>
 														3 - Good
 													</option>
-													<option
-														value="4"
-														style={{ backgroundColor: 'rgba(232,50,131,255)' }}>
+													<option value="4" style={{ color: 'black' }}>
 														4 - Very Good
 													</option>
-													<option
-														value="5"
-														style={{ backgroundColor: 'rgba(232,50,131,255)' }}>
+													<option value="5" style={{ color: 'black' }}>
 														5 - Excellent
 													</option>
 												</Form.Control>
