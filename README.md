@@ -11,24 +11,27 @@ Start both frontend & backend
 > Home Page
 
 ![alt text](https://github.com/zongxilli/E-shop/blob/main/images/Demo%20(1).png)
-> Shopping Cart
+> Profile
 
 ![alt text](https://github.com/zongxilli/E-shop/blob/main/images/Demo%20(2).png)
-> Shipping
+> Shopping Cart
 
 ![alt text](https://github.com/zongxilli/E-shop/blob/main/images/Demo%20(3).png)
-> Place Order
+> Shipping
 
 ![alt text](https://github.com/zongxilli/E-shop/blob/main/images/Demo%20(4).png)
-> Order Details & Pay
+> Place Order
 
 ![alt text](https://github.com/zongxilli/E-shop/blob/main/images/Demo%20(5).png)
-> PayPal
+> Order Details & Pay
 
 ![alt text](https://github.com/zongxilli/E-shop/blob/main/images/Demo%20(6).png)
-> Admin Area
+> PayPal
+
 ![alt text](https://github.com/zongxilli/E-shop/blob/main/images/Demo%20(7).png)
+> Admin Area
 ![alt text](https://github.com/zongxilli/E-shop/blob/main/images/Demo%20(8).png)
 ![alt text](https://github.com/zongxilli/E-shop/blob/main/images/Demo%20(9).png)
 ![alt text](https://github.com/zongxilli/E-shop/blob/main/images/Demo%20(10).png)
+![alt text](https://github.com/zongxilli/E-shop/blob/main/images/Demo%20(11).png)
 ### And More...
