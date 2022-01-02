@@ -10,7 +10,6 @@ import morgan from 'morgan';
 
 import connectDB from './config/db.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
-import { requestAddress } from './middleware/consoleLogMiddleware.js';
 
 import productRoutes from './routes/productRoutes.js';
 import userRoutes from './routes/userRoutes.js';
