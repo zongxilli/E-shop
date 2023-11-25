@@ -1,5 +1,4 @@
 # e-Commerce React application
-### [Link to this App](https://kennysshop.herokuapp.com/)
 > Full-stack(MERN) real-time web app mainly using React.js, Redux, Node.js, Express, MongoDB, Axios, JWT authentication and Bootstrap
 
 > Full-featured shopping cart with PayPal and credit/debit payments, also product search, carousel, pagination, rating and review system with Admin area to manage customers, products, orders with a complete user authentication system
